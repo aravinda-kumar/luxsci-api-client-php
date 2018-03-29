@@ -1,0 +1,19 @@
+{
+  "name": "eherrera/luxsci-api-client-php",
+  "description": "LuxSci API client for php",
+  "minimum-stability": "alpha",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ernesto Herrera Morales",
+      "email": "ernestoh2006@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "LuxSciApiClient\\": "",
+      "LuxSciApiClient_Model\\": "Model/",
+      "LuxSciApiClient_Model_V2\\": "Model/V2/"
+    }
+  }
+}
