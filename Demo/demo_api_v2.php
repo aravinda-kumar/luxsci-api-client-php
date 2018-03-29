@@ -1,17 +1,10 @@
-# luxsci-api-client-php
-**LuxSci API client for php**
-
-**Demo**
-
-Send a SecureLine Secure Email and/or SecureText
-
-```
+<?php
+require '../vendor/autoload.php';
 use LuxSciApiClient\LuxSciAPIv2Client;
 use LuxSciApiClient_Model\BodyType;
 use LuxSciApiClient_Model_V2\SendEmailOrTextRequest;
 
 // Initialize client
-
 $client = new LuxSciAPIv2Client(
     'your_token',
     'your_secret',
@@ -28,5 +21,5 @@ $sendEmailOrTextRequest->subject = 'Testing from API';
 $sendEmailOrTextRequest->body_type = BodyType::Html;
 $sendEmailOrTextRequest->body = "<h1>Hello!!<h1><p>Testing from API</p>";
 
+// send a SecureLine Secure Email and/or SecureText
 $client->sendEmailOrText($sendEmailOrTextRequest);
-```
