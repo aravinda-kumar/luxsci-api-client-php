@@ -11,6 +11,8 @@ class LuxSciAPIv2Client
         'host' => 'rest.luxsci.com'
     ];
 
+    private $authToken;
+
     private $_timeout = 30;
 
     /**
@@ -135,9 +137,7 @@ class LuxSciAPIv2Client
      */
     public function sendEmailOrText(SendEmailOrTextRequest $request)
     {
-        $authData = $this->auth();
-        $authToken = $authData['data']['auth'];
-        if (!$authToken) return false;
+        $authToken = $this->getAuthToken();
         $response = $this->request('POST', $authToken, '/perl/api/v2/user/' . $this->_params['user'] . '/email/compose/secureline/send', $request->toArray());
         return $response;
     }
@@ -194,5 +194,21 @@ class LuxSciAPIv2Client
     {
         $this->_timeout = $timeout;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getAuthToken()
+    {
+        if (!isset($this->authToken)) {
+            $authData = $this->auth();
+            if ($authData['data']['success'] === 0) {
+                throw new \Exception($authData['data']['error_message'], $authData['code']);
+            }
+            $this->authToken = $authData['data']['auth'];
+        }
+
+        return $this->authToken;
     }
 }
